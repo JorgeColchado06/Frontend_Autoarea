@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import Cookies from 'js-cookie';
 import SearchBar from "./Searchbar"; 
+import AggAuto from "./aggauto";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -59,11 +60,15 @@ const Header = () => {
       } fixed w-full z-10 lg:px-8 transition-all`}
     >
       <div className="container mx-auto flex items-center justify-between h-full">
-        <Link to={"/"}>
-          <div className="w-[100px]">
-            <img src="/Icono_AA-removebg-preview.png" alt="" />
-          </div>
-        </Link>
+        <div className="flex items-center space-x-4">
+          <Link to={"/"}>
+            <div className="w-[100px]">
+              <img src="/Icono_AA-removebg-preview.png" alt="" />
+            </div>
+          </Link>
+          
+          <AggAuto />
+        </div>
 
         {/* Barra de búsqueda */}
         <div> 
@@ -77,7 +82,7 @@ const Header = () => {
 
           <Menu as="div" className="relative inline-block text-left">
             <div>
-              <Menu.Button className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-16">
+              <Menu.Button className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-12">
                 <FaUser className="text-2xl" />         
               </Menu.Button>
             </div>
@@ -179,7 +184,7 @@ const Header = () => {
           </Menu>
 
           {/* Favoritos */}
-          <div className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-16">
+          <div className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-12">
 
             <button onClick={() => setabrir(!abrir)}>
             <FaHeart className="text-2xl" />
