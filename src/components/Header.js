@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { SidebarContext } from "../contexts/SidebarContext";
 import { CartContext } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
-import { FaUser, FaShoppingCart } from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import Cookies from 'js-cookie';
+import SearchBar from "./Searchbar"; 
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -17,9 +18,10 @@ const Header = () => {
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { itemAmount } = useContext(CartContext);
 
+
   useEffect(() => {
     const checkCookie = (session) => {
-      if (session) {
+      if (session) {              
         // Assuming you have a "navigation" array defined somewhere
 
         setSession(true);
@@ -51,7 +53,7 @@ const Header = () => {
   return (
     <header
       className={`${
-        isActive ? "bg-white py-4 shadow-md" : "bg-none py-6"
+        isActive ? "bg-white py-4 shadow-md" : "bg-none py-3"
       } fixed w-full z-10 lg:px-8 transition-all`}
     >
       <div className="container mx-auto flex items-center justify-between h-full">
@@ -61,13 +63,14 @@ const Header = () => {
           </div>
         </Link>
 
+
         {/* Contenedor de los íconos de usuario y carrito de compras */}
         <div className="flex items-center">
 
-          {/* Usuario */}
+          {/*       */}
           <Menu as="div" className="relative inline-block text-left">
             <div>
-              <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm mr-10">
+              <Menu.Button className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-16">
                 <FaUser className="text-2xl" />         
               </Menu.Button>
             </div>
@@ -166,7 +169,18 @@ const Header = () => {
                 </div>
               </Menu.Items>
             </Transition>
-          </Menu>
+          </Menu> 
+
+          {/* Favoritos */}
+          <div className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-16">
+
+            <button 
+
+ >
+            <FaHeart className="text-2xl" />
+            </button>
+          </div>
+
 
           {/* Carrito de compras */}
           <div

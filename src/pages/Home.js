@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import Product from '../components/Product'
-import Hero from '../components/Hero'
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -21,7 +20,6 @@ const Home = () => {
   return (
     <div>
     <Header />
-      <Hero />
       <section className="py-20">
         <div className="container mx-auto">
           <h1 className="text-3xl font-semibold mb-10 text-center">Explore Our Products</h1>
