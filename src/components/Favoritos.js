@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 
+import { Link } from "react-router-dom";
+
 import { IoMdArrowForward } from "react-icons/io";
 import { FiTrash2 } from "react-icons/fi";
 
@@ -7,9 +9,11 @@ import FavoriteItem from "../components/FavoriteItem";
 import { FSidebarContext } from "../contexts/FSidebarContext";
 import { FavoriteContext } from "../contexts/FavoritosContext";
 
-const Favoritos = () => {
-  const { abrir, cerrar } = useContext(FSidebarContext);
+const Favorite = () => {
+  const { abrir, handleClose } = useContext(FSidebarContext);
   const { favorite, clearFavorites} = useContext(FavoriteContext);
+  console.log("puto");
+
 
   return (
     <div
@@ -20,7 +24,7 @@ const Favoritos = () => {
       <div className="flex items-center justify-between py-6 border-b">
         <div className="uppercase text-sm font-semibold">Favoritos</div>
         <div
-          onClick={cerrar}
+          onClick={handleClose}
           className="cursor-poniter w-8 h-8 flex justify-center items-center"
         >
           <IoMdArrowForward className="text-2xl" />
@@ -46,4 +50,4 @@ const Favoritos = () => {
   );
 };
 
-export default Favoritos;
+export default Favorite;

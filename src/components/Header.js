@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SidebarContext } from "../contexts/SidebarContext";
 import { CartContext } from "../contexts/CartContext";
+import { FSidebarContext } from "../contexts/FSidebarContext";
 import { Link } from "react-router-dom";
 import { FaUser, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { Fragment } from 'react';
@@ -17,6 +18,7 @@ const Header = () => {
   const [isActive, setIsActive] = useState(false);
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { itemAmount } = useContext(CartContext);
+  const { abrir, setabrir } = useContext(FSidebarContext);
 
 
   useEffect(() => {
@@ -63,11 +65,16 @@ const Header = () => {
           </div>
         </Link>
 
+        {/* Barra de búsqueda */}
+        <div> 
+          <SearchBar />
+        </div>
 
         {/* Contenedor de los íconos de usuario y carrito de compras */}
         <div className="flex items-center">
 
           {/*       */}
+
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <Menu.Button className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-16">
@@ -169,14 +176,12 @@ const Header = () => {
                 </div>
               </Menu.Items>
             </Transition>
-          </Menu> 
+          </Menu>
 
           {/* Favoritos */}
           <div className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-16">
 
-            <button 
-
- >
+            <button onClick={() => setabrir(!abrir)}>
             <FaHeart className="text-2xl" />
             </button>
           </div>
@@ -200,5 +205,3 @@ const Header = () => {
 };
 
 export default Header;
-
-

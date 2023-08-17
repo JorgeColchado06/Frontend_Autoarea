@@ -4,14 +4,18 @@ import {FaHeart } from 'react-icons/fa';
 
 import { BsPlus, BsEyeFill } from "react-icons/bs";
 import { CartContext } from "../contexts/CartContext";
+import { FavoriteContext } from "../contexts/FavoritosContext";
 
 const IconComponent = ({ active }) => {
   return active ? <FaHeart className="text-red-500" /> : <FaHeart className="text-white" />;
 };
 
+
+
 const Product = ({ product }) => {
   const { addToCart } = useContext(CartContext);
   const [active, setActive] = useState(false);
+  const {addFavorite, removeFavorite } = useContext(FavoriteContext);
 
   const handleIconClick = () => {
     setActive(!active);
@@ -47,11 +51,19 @@ const Product = ({ product }) => {
             <BsEyeFill />
           </Link>
 
-          <button onClick={() => { handleIconClick()}}>     
-           <div className="flex justify-center rounded-full items-center text-white w-12 h-12 bg-[#DE6600]">
-                      <IconComponent active={active} />
-            </div>
-          </button>
+          <button onClick={() => {
+          handleIconClick();
+          if (!active) {
+           addFavorite(product, id);
+           } else {
+           removeFavorite(id);
+             }
+            }}>
+  <div className="flex justify-center rounded-full items-center text-white w-12 h-12 bg-[#DE6600]">
+    <IconComponent active={active} />
+  </div>
+</button>
+
         </div>
       </div>
       {/* category, title & price */}

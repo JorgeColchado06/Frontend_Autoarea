@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import { ProtectedRoute } from './components/protectedRoute';
 import Sidebar from "./components/Sidebar";
+import Favorite from "./components/Favoritos";
 
 import Cookies from 'js-cookie';
 
@@ -23,6 +24,7 @@ const App = () => {
 
           </Route>
         </Routes>
+        <Favorite />
         <Sidebar />
       </Router>
     </div>
