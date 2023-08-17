@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useEffect} from "react";
 
 export const CartContext = createContext();
 
@@ -13,7 +13,7 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const total = cart.reduce((accumulator, currentItem) => {
-      return accumulator + currentItem.price * currentItem.amount;
+      return accumulator + currentItem.PRICE * currentItem.amount;
     }, 0);
     setTotal(total);
   });
@@ -33,11 +33,11 @@ const CartProvider = ({ children }) => {
     const newItem = { ...product, amount: 1 };
     // check if the item is already in the cart
     const cartItem = cart.find((item) => {
-      return item.id === id;
+      return item.ID === id;
     });
     if (cartItem) {
       const newCart = [...cart].map((item) => {
-        if (item.id === id) {
+        if (item.ID === id) {
           return { ...item, amount: cartItem.amount + 1 };
         } else return item;
       });
@@ -50,7 +50,7 @@ const CartProvider = ({ children }) => {
   // remove from cart
   const removeFromCart = (id) => {
     const newCart = cart.filter((item) => {
-      return item.id !== id;
+      return item.ID !== id;
     });
     setCart(newCart);
   };
@@ -62,16 +62,16 @@ const CartProvider = ({ children }) => {
 
   // increase amount
   const increaseAmount = (id) => {
-    const cartItem = cart.find((item) => item.id === id);
+    const cartItem = cart.find((item) => item.ID === id);
     addToCart(cartItem, id);
   };
 
   // decrease amount
   const decreaseAmount = (id) => {
-    const cartItem = cart.find((item) => item.id === id);
+    const cartItem = cart.find((item) => item.ID === id);
     if (cartItem) {
       const newCart = cart.map((item) => {
-        if (item.id === id) {
+        if (item.ID === id) {
           return { ...item, amount: cartItem.amount - 1 };
         } else {
           return item;

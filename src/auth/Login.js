@@ -7,21 +7,21 @@ import { db } from '../components/API';
 
 export function Login() {
 
-    const [user, setUser] = useState("");
+    const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     const navigate = useNavigate();
 
     const Log = async(e) => {
         const data = {
-            user : user,
+            email : email,
             pass: pass
         }
         const res = await axios.post(`${db}/`, data);
         console.log(res);
 
        if(res.data.msg === "Ok"){
-            Cookies.set('Session_Event', res.data.usr);
-            console.log(res.data.usr)
+            Cookies.set('Session_Event', res.data.id);
+            console.log(res.data.id)
             navigate('/');
         }
         else{
@@ -42,14 +42,14 @@ export function Login() {
         <div className='mt-6'>
           <div className='flex flex-col'>
             <label className='text-lg font-medium text-[#003F5A]'>Correo Electrónico</label>
-            <input onChange={(e) => setUser(e.target.value)} type="text" id="name"
+            <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" id="name"
                         className='w-full border-2 border-[#007A7A] rounded-xl p-4 mt-1 bg-transparent'
                         placeholder="Ingresa tu correo electrónico" required=""
                     />
                 </div>
                 <div className='flex flex-col mt-4'>
                     <label className='text-lg font-medium text-[#003F5A]'>Contraseña</label>
-                    <input onChange={(e) => setPass(e.target.value)} id="pass"
+                    <input value={pass} onChange={(e) => setPass(e.target.value)} id="pass"
                         className='w-full border-2 border-[#007A7A] rounded-xl p-4 mt-1 bg-transparent'
                         placeholder="Ingresa tu contraseña"
                         type={"password"} required=""
