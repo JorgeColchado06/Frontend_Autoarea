@@ -10,6 +10,7 @@ const CartProvider = ({ children }) => {
   // total price state
   const [total, setTotal] = useState(0);
 
+
   useEffect(() => {
     const total = cart.reduce((accumulator, currentItem) => {
       return accumulator + currentItem.price * currentItem.amount;
@@ -83,6 +84,7 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  
   return (
     <CartContext.Provider
       value={{
