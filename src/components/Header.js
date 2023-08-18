@@ -76,6 +76,9 @@ const Header = () => {
           <SearchBar />
         </div>
 
+        <div> 
+          <SearchBar />
+        </div>
 
         {/* Contenedor de los íconos de usuario y carrito de compras */}
         <div className="flex items-center">

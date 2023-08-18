@@ -6,9 +6,7 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import { ProtectedRoute } from './components/protectedRoute';
 import Sidebar from "./components/Sidebar";
-import Favorite from "./components/Favoritos";
-import Perfil from "./pages/Perfil";
-
+import { Purchases } from "./pages/Purchases";
 import Cookies from 'js-cookie';
 
 
@@ -21,7 +19,7 @@ const App = () => {
           <Route path="/product/:id" element={<ProductDetails />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/perfil" element={<Perfil />}></Route>
+          <Route path="/purchases" element={<Purchases/>}></Route>
           <Route element={<ProtectedRoute session={Cookies.get("Session_Event")}/>}>
 
           </Route>
