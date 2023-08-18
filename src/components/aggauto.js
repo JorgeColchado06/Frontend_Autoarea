@@ -84,7 +84,7 @@ const AggAuto = () => {
             {/* Agregar otros campos según sea necesario */}
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+              className="bg-[#DE6600] hover:bg-[#de6800d0] text-white px-4 py-2 rounded"
             >
               Enviar
             </button>

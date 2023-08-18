@@ -60,7 +60,7 @@ const Header = () => {
       } fixed w-full z-10 lg:px-8 transition-all`}
     >
       <div className="container mx-auto flex items-center justify-between h-full">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-8">
           <Link to={"/"}>
             <div className="w-[100px]">
               <img src="/Icono_AA-removebg-preview.png" alt="" />
