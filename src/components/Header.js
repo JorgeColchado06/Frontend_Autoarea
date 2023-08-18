@@ -51,6 +51,7 @@ const Header = () => {
     Cookies.remove("Session_Event");
     setSession(false);
     window.location.reload();
+
   };
 
   return (
@@ -67,8 +68,8 @@ const Header = () => {
             </div>
           </Link>
           
-          <AggAuto />
-        </div>
+          {Session && <AggAuto />}       
+           </div>
 
         {/* Barra de búsqueda */}
         <div> 
