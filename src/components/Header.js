@@ -51,6 +51,7 @@ const Header = () => {
     Cookies.remove("Session_Event");
     setSession(false);
     window.location.reload();
+
   };
 
   return (
@@ -60,15 +61,15 @@ const Header = () => {
       } fixed w-full z-10 lg:px-8 transition-all`}
     >
       <div className="container mx-auto flex items-center justify-between h-full">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-8">
           <Link to={"/"}>
             <div className="w-[100px]">
               <img src="/Icono_AA-removebg-preview.png" alt="" />
             </div>
           </Link>
           
-          <AggAuto />
-        </div>
+          {Session && <AggAuto />}       
+           </div>
 
         {/* Barra de búsqueda */}
         <div> 
@@ -101,13 +102,13 @@ const Header = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <a
-                        href="#"
+                        href="/Perfil"
                         className={classNames(
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                           'block px-4 py-2 text-sm'
                         )}
                       >
-                        Account settings
+                        My Account
                       </a>
                     )}
                   </Menu.Item>
@@ -121,19 +122,6 @@ const Header = () => {
                         )}
                       >
                         Support
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={classNames(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm'
-                        )}
-                      >
-                        License
                       </a>
                     )}
                   </Menu.Item>
