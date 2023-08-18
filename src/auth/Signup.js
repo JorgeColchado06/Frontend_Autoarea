@@ -46,7 +46,7 @@ export function Signup() {
               <p className="mb-4 font-medium text-base">
               Crea tu cuenta. Es gratis y solo toma un minuto
               </p>
-              <form>
+              <div>
                 <div className="grid grid-cols-2 gap-5">
                   <input value={name} type="text" onChange={(e) =>setName(e.target.value)} placeholder="Name" className="border border-gray-400 py-1 px-2"/>
                   <input value={phone} type="text" onChange={(e) => setPhone(e.target.value)} placeholder="Phone" className="border border-gray-400 py-1 px-2"/>
@@ -70,7 +70,7 @@ export function Signup() {
                 <div className='mt-5'>
                 <p className='font-medium text-base'>¿Ya tienes una cuenta? <a href='/Login' className='font-medium text-base text-[#DE6600]'>Iniciar Sesion</a> </p> 
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

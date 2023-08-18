@@ -1,12 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import {FaHeart } from 'react-icons/fa';
 
 import { BsPlus, BsEyeFill } from "react-icons/bs";
-
 import { CartContext } from "../contexts/CartContext";
+import { FavoriteContext } from "../contexts/FavoritosContext";
+
+const IconComponent = ({ active }) => {
+  return active ? <FaHeart className="text-red-500" /> : <FaHeart className="text-white" />;
+};
+
+
 
 const Product = ({ product }) => {
   const { addToCart } = useContext(CartContext);
+  const [active, setActive] = useState(false);
+  const {addFavorite, removeFavorite } = useContext(FavoriteContext);
+
+  const handleIconClick = () => {
+    setActive(!active);
+  };
+
 
   // destructure product
   const { ID, IMAGE, CATEGORY, NAME, PRICE } = product;
@@ -37,6 +51,20 @@ const Product = ({ product }) => {
           >
             <BsEyeFill />
           </Link>
+
+          <button onClick={() => {
+          handleIconClick();
+          if (!active) {
+           addFavorite(product, ID);
+           } else {
+           removeFavorite(ID);
+             }
+            }}>
+  <div className="flex justify-center rounded-full items-center text-white w-12 h-12 bg-[#DE6600]">
+    <IconComponent active={active} />
+  </div>
+</button>
+
         </div>
       </div>
       {/* category, title & price */}
