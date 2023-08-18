@@ -8,6 +8,8 @@ import { ProtectedRoute } from './components/protectedRoute';
 import Sidebar from "./components/Sidebar";
 import { Purchases } from "./pages/Purchases";
 import Cookies from 'js-cookie';
+import Favorite from './components/Favoritos'
+import UserProfile from "./pages/Perfil";
 
 
 const App = () => {
@@ -20,6 +22,7 @@ const App = () => {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/purchases" element={<Purchases/>}></Route>
+          <Route path="/Perfil" element={<UserProfile/>}></Route>
           <Route element={<ProtectedRoute session={Cookies.get("Session_Event")}/>}>
 
           </Route>

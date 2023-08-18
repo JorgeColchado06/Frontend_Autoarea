@@ -8,23 +8,6 @@ import { useNavigate } from 'react-router-dom'
 
 const UserProfile = () => {
 
-
-
-  const initialUser = {
-    name: "Nombre del Usuario",
-    phone: "123-456-7890",
-    email: "usuario@example.com",
-    address: "Calle Principal 123",
-    zipCode: "12345",
-    password: "********", // Contraseña ficticia por seguridad
-    creditCard: {
-      cardNumber: "**** **** **** 1234",
-      expirationDate: "12/25",
-      cvv: "***",
-    },
-  };
-
-
   //Variables para los datos del usuario
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -43,8 +26,6 @@ const UserProfile = () => {
   const [resi, setResi] = useState("");
   const [Cdata, setCdata] = useState("");
 
-
-  const [user, setUser] = useState(initialUser);
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingCreditCard, setIsEditingCreditCard] = useState(false);
 

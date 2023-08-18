@@ -75,11 +75,6 @@ const Header = () => {
         <div> 
           <SearchBar />
         </div>
-
-        <div> 
-          <SearchBar />
-        </div>
-
         {/* Contenedor de los íconos de usuario y carrito de compras */}
         <div className="flex items-center">
 
@@ -119,13 +114,13 @@ const Header = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <a
-                        href="#"
+                        href="/purchases"
                         className={classNames(
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                           'block px-4 py-2 text-sm'
                         )}
                       >
-                        Support
+                        History
                       </a>
                     )}
                   </Menu.Item>

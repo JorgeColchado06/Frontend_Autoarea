@@ -7,9 +7,13 @@ import ProductProvider from "./contexts/ProductContext";
 import SidebarProvider from "./contexts/SidebarContext";
 import CartProvider from "./contexts/CartContext";
 import PurchasesProvider from "./contexts/PurchasesContext";
+import FSidebarProvider from "./contexts/FSidebarContext";
+import FavoriteProvider from "./contexts/FavoritosContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <FavoriteProvider>
+  <FSidebarProvider>
   <SidebarProvider>
     <CartProvider>
       <PurchasesProvider>
@@ -21,4 +25,6 @@ root.render(
       </PurchasesProvider>
     </CartProvider>
   </SidebarProvider>
+  </FSidebarProvider>
+  </FavoriteProvider>
 );
