@@ -1,27 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaCar } from "react-icons/fa";
-import Select from "react-select";
-
-const options1 = [
-    { value: "2022", label: "2022" },
-    { value: "2021", label: "2021" },
-    { value: "2020", label: "2020" },
-    // Agrega más opciones aquí
-  ];
-  
-  const options2 = [
-    { value: "Toyota", label: "Toyota" },
-    { value: "Honda", label: "Honda" },
-    { value: "Ford", label: "Ford" },
-    // Agrega más opciones aquí
-  ];
-  
-  const options3 = [
-    { value: "Corolla", label: "Corolla" },
-    { value: "Civic", label: "Civic" },
-    { value: "Mustang", label: "Mustang" },
-    // Agrega más opciones aquí
-  ];
 
 const AggAuto = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -52,33 +30,33 @@ const AggAuto = () => {
   return (
     <div>
       <div className="cursor-pointer flex items-center " onClick={toggleForm}>
-        <FaCar size={24} /> <p className="ml-2">Agregra vehiculo</p>
+        <FaCar size={24} /> <p className="ml-2">Agregar vehículo</p>
       </div>
       {isFormVisible && (
         <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50">
           <form ref={formRef} onSubmit={handleSubmit} className="bg-white p-4 rounded w-11/12 max-w-[600px]">
             <div>  
-            <p>Agregue su vehículo para obtener un ajuste exacto.</p>
+              <p>Agregue su vehículo para obtener un ajuste exacto.</p>
             </div>
             <div className="mb-4 mt-4">
-              <Select
-                options={options1}
-                isSearchable
+              <input
+                type="text"
                 placeholder="Año"
+                className="py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300 w-full"
               />
             </div>
             <div className="mb-4">
-              <Select
-                options={options2}
-                isSearchable
+              <input
+                type="text"
                 placeholder="Marca"
+                className="py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300 w-full"
               />
             </div>
             <div className="mb-4">
-              <Select
-                options={options3}
-                isSearchable
+              <input
+                type="text"
                 placeholder="Modelo"
+                className="py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300 w-full"
               />
             </div>
             {/* Agregar otros campos según sea necesario */}
