@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import axios from 'axios';
+import { db } from '../components/API';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom'
 
 const UserProfile = () => {
+
+
+
   const initialUser = {
     name: "Nombre del Usuario",
     phone: "123-456-7890",
@@ -17,11 +24,59 @@ const UserProfile = () => {
     },
   };
 
+
+  //Variables para los datos del usuario
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [st, setSt] = useState("");
+  const [zip, setZip] = useState("");
+  const [pass, setPass] = useState("");
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
+
+  //Variables para los datos de la tarjeta del usuario
+  const [Cname, setCname] = useState("");
+  const [num, setNum] = useState("");
+  const [ccv, setCcv] = useState("");
+  const [date, setDate] = useState("");
+  const [resi, setResi] = useState("");
+  const [Cdata, setCdata] = useState("");
+
+
   const [user, setUser] = useState(initialUser);
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingCreditCard, setIsEditingCreditCard] = useState(false);
 
+  //Funcion para obtener la informacion del usuario
+  const getData = async () => {
+    const id = Cookies.get('Session_Event');
+    const res = await axios.get(`${db}/user/${id}`);
+    const data = res.data;
+    setData(data);
+    setName(data.name);
+    setPhone(data.phone);
+    setEmail(data.email);
+    setSt(data.street);
+    setZip(data.ZIP);
+    setPass(data.password);
+    console.log(data);
+  }
+
+  const getCards = async () => {
+    const id = Cookies.get('Session_Event')
+    const res = await axios.get(`${db}/card/${id}`)
+    const data = res.data;
+    setCdata(data);
+    setCname(data.name);
+    setNum(data.number);
+    setCcv(data.cvv);
+    setDate(data.date);
+    setResi(data.residence);
+  }
+
   const handleEditClick = () => {
+    getData();
     setIsEditing(true);
   };
 
@@ -29,28 +84,37 @@ const UserProfile = () => {
     setIsEditingCreditCard(true);
   };
 
-  const handleSaveClick = () => {
-    // Aquí puedes implementar la lógica para guardar los cambios en el backend
-    setIsEditing(false);
-    setIsEditingCreditCard(false);
-  };
+  const handleSubmit = async () => {
+    const id = Cookies.get('Session_Event');
+    const res = await axios.put(`${db}/user/${id}`, {
+        name: name,
+        phone: phone,
+        street: st,
+        ZIP: zip,
+        email: email,
+        pass: pass
+    })
+    const data = await res.data;
+    setData(data);
+    console.log(data)
 
-  const handleInputChange = (field, value) => {
-    setUser((prevUser) => ({
-      ...prevUser,
-      [field]: value,
-    }));
-  };
+    const response = await axios.put(`${db}/card/${Cdata.id}`, {
+      name: Cname,
+      number: num,
+      cvv: ccv,
+      date: date,
+      residence: resi,
+    })
+    const datos = await response.data;
+    setCdata(datos);
+    navigate('/');
+  }
 
-  const handleCreditCardChange = (field, value) => {
-    setUser((prevUser) => ({
-      ...prevUser,
-      creditCard: {
-        ...prevUser.creditCard,
-        [field]: value,
-      },
-    }));
-  };
+
+  useEffect(() => {
+    getData();
+    getCards();
+  }, [])
 
   return (
     <div>
@@ -65,35 +129,43 @@ const UserProfile = () => {
               <h2 className="text-lg font-semibold mb-2">Mis Datos</h2>
               {isEditing ? (
                 <>
+                <label><strong>Name </strong></label>
                   <input
                     type="text"
-                    value={user.name}
-                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="mb-2"
                   />
+                  <div>
+                  <label><strong>Phone </strong></label>
                   <input
+                    placeholder={data.phone}
                     type="text"
-                    value={user.phone}
-                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
+                  </div>
                 </>
               ) : (
                 <>
-                  <p><strong>Nombre:</strong> {user.name}</p>
-                  <p><strong>Número Telefónico:</strong> {user.phone}</p>
+                  <p><strong>Nombre:</strong> {data.name}</p>
+                  <p><strong>Número Telefónico:</strong> {data.phone}</p>
                 </>
               )}
             </div>
             <div className="bg-white p-4 shadow-md rounded-md">
               <h2 className="text-lg font-semibold mb-2">Correo Electrónico</h2>
               {isEditing ? (
+                <>
+                <label><strong>Email </strong></label>
                 <input
                   type="text"
-                  value={user.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
+                </>
               ) : (
-                <p><strong>Correo Electrónico:</strong> {user.email}</p>
+                <p><strong>Correo Electrónico:</strong> {data.email}</p>
               )}
             </div>
           </div>
@@ -102,35 +174,42 @@ const UserProfile = () => {
               <h2 className="text-lg font-semibold mb-2">Dirección</h2>
               {isEditing ? (
                 <>
+                <label><strong>Direccion: </strong></label>
                   <input
                     type="text"
-                    value={user.address}
-                    onChange={(e) => handleInputChange("address", e.target.value)}
+                    value={st}
+                    onChange={(e) => setSt(e.target.value)}
                     className="mb-2"
                   />
+                  <div>
+                  <label><strong>ZIP: </strong></label>
                   <input
                     type="text"
-                    value={user.zipCode}
-                    onChange={(e) => handleInputChange("zipCode", e.target.value)}
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
                   />
+                  </div>
                 </>
               ) : (
                 <>
-                  <p><strong>Dirección:</strong> {user.address}</p>
-                  <p><strong>ZIP:</strong> {user.zipCode}</p>
+                  <p><strong>Dirección:</strong> {data.street}</p>
+                  <p><strong>ZIP:</strong> {data.ZIP}</p>
                 </>
               )}
             </div>
             <div className="bg-white p-4 shadow-md rounded-md">
               <h2 className="text-lg font-semibold mb-2">Contraseña</h2>
               {isEditing ? (
+                <>
+                <label><strong>Password: </strong></label>
                 <input
                   type="password"
-                  value={user.password}
-                  onChange={(e) => handleInputChange("password", e.target.value)}
+                  value={pass}
+                  onChange={(e) => setPass(e.target.value)}
                 />
+                </>
               ) : (
-                <p><strong>Contraseña:</strong> {user.password}</p>
+                <p><strong>Contraseña:</strong> {data.password}</p>
               )}
             </div>
           </div>
@@ -141,33 +220,27 @@ const UserProfile = () => {
                 <>
                   <input
                     type="text"
-                    value={user.creditCard.cardNumber}
-                    onChange={(e) =>
-                      handleCreditCardChange("cardNumber", e.target.value)
-                    }
+                    value={num}
+                    onChange={(e) => setNum(e.target.value)}
                     className="mb-2"
                   />
                   <input
                     type="text"
-                    value={user.creditCard.expirationDate}
-                    onChange={(e) =>
-                      handleCreditCardChange("expirationDate", e.target.value)
-                    }
+                    value={date}
+                    onChange={(e) => setDate(e.target.date)}
                     className="mb-2"
                   />
                   <input
                     type="text"
-                    value={user.creditCard.cvv}
-                    onChange={(e) =>
-                      handleCreditCardChange("cvv", e.target.value)
-                    }
+                    value={ccv}
+                    onChange={(e) => setCcv(e.target.value)}
                   />
                 </>
               ) : (
                 <>
-                  <p><strong>Número de Tarjeta:</strong> {user.creditCard.cardNumber}</p>
-                  <p><strong>Fecha de Expiración:</strong> {user.creditCard.expirationDate}</p>
-                  <p><strong>CVV:</strong> {user.creditCard.cvv}</p>
+                  <p><strong>Número de Tarjeta:</strong> {Cdata.number}</p>
+                  <p><strong>Fecha de Expiración:</strong> {Cdata.date}</p>
+                  <p><strong>CVV:</strong> {Cdata.cvv}</p>
                 </>
               )}
             </div>
@@ -175,7 +248,7 @@ const UserProfile = () => {
           <div className="mt-4">
             {isEditing || isEditingCreditCard ? (
               <button
-                onClick={handleSaveClick}
+                onClick={() => handleSubmit()}
                 className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
               >
                 Guardar Cambios
