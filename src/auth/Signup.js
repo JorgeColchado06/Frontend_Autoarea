@@ -18,7 +18,11 @@ export function Signup() {
     const Signin = async() => {
         const res = await axios.post(`${db}/signup`, {
             name:name,
-            pass:pass
+            street: street,
+            ZIP: zip,
+            email: email,
+            pass: pass,
+            phone: phone
         });
         Cookies.set('Session_Event', res.data.id);
         console.log(res.data.id)
@@ -42,21 +46,21 @@ export function Signup() {
               <p className="mb-4 font-medium text-base">
               Crea tu cuenta. Es gratis y solo toma un minuto
               </p>
-              <form>
+              <div>
                 <div className="grid grid-cols-2 gap-5">
                   <input value={name} type="text" onChange={(e) =>setName(e.target.value)} placeholder="Name" className="border border-gray-400 py-1 px-2"/>
-                  <input type="text" placeholder="Phone" className="border border-gray-400 py-1 px-2"/>
+                  <input value={phone} type="text" onChange={(e) => setPhone(e.target.value)} placeholder="Phone" className="border border-gray-400 py-1 px-2"/>
                 </div>
 
                 <div className="grid grid-cols-2 gap-5 mt-5">
-                  <input type="text" placeholder="Street" className="border border-gray-400 py-1 px-2"/>
-                  <input type="text" placeholder="ZIP" className="border border-gray-400 py-1 px-2"/>
+                  <input value={street} type="text" onChange={(e) =>setStreet(e.target.value)} placeholder="Street" className="border border-gray-400 py-1 px-2"/>
+                  <input value={zip} type="text" placeholder="ZIP" onChange={(e) => setZip(e.target.value)} className="border border-gray-400 py-1 px-2"/>
                 </div>
                 <div className="mt-5">
-                  <input type="text" placeholder="Email" className="border border-gray-400 py-1 px-2 w-full"/>
+                  <input value={email} type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} className="border border-gray-400 py-1 px-2 w-full"/>
                 </div>
                 <div className="mt-5">
-                  <input value={pass} id='password' on onChange={(e) => setPass(e.target.value)} type='password' placeholder="Password" className="border border-gray-400 py-1 px-2 w-full"/>
+                  <input value={pass} id='password' onChange={(e) => setPass(e.target.value)} type='password' placeholder="Password" className="border border-gray-400 py-1 px-2 w-full"/>
                 </div>
                 <div className="mt-5">
                 </div>
@@ -66,7 +70,7 @@ export function Signup() {
                 <div className='mt-5'>
                 <p className='font-medium text-base'>¿Ya tienes una cuenta? <a href='/Login' className='font-medium text-base text-[#DE6600]'>Iniciar Sesion</a> </p> 
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

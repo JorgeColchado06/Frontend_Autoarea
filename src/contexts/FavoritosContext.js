@@ -28,7 +28,7 @@ const FavoriteProvider = ({ children }) => {
     // remove from favorites
     const removeFavorite = (id) => {
         const newFavorite = favorite.filter((item) => {
-            return item.id !== id;
+            return item.ID !== id;
         });
         setFavorite(newFavorite);
         }

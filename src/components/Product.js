@@ -24,6 +24,7 @@ const Product = ({ product }) => {
 
   // destructure product
   const { ID, IMAGE, CATEGORY, NAME, PRICE } = product;
+
   return (
     <div>
       <div className="border border-[#e4e4e4] h-[300px] mb-4 relative overflow-hidden group transition">
@@ -54,9 +55,9 @@ const Product = ({ product }) => {
           <button onClick={() => {
           handleIconClick();
           if (!active) {
-           addFavorite(product, id);
+           addFavorite(product, ID);
            } else {
-           removeFavorite(id);
+           removeFavorite(ID);
              }
             }}>
   <div className="flex justify-center rounded-full items-center text-white w-12 h-12 bg-[#DE6600]">

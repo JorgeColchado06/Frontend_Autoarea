@@ -22,6 +22,7 @@ const Header = () => {
   const { abrir, setabrir } = useContext(FSidebarContext);
 
 
+
   useEffect(() => {
     const checkCookie = (session) => {
       if (session) {              
@@ -67,14 +68,14 @@ const Header = () => {
               <img src="/Icono_AA-removebg-preview.png" alt="" />
             </div>
           </Link>
-          
-          {Session && <AggAuto />}       
-           </div>
+          {Session && <AggAuto />}
+        </div>
 
         {/* Barra de búsqueda */}
         <div> 
           <SearchBar />
         </div>
+
 
         {/* Contenedor de los íconos de usuario y carrito de compras */}
         <div className="flex items-center">
@@ -169,8 +170,7 @@ const Header = () => {
                 </div>
               </Menu.Items>
             </Transition>
-          </Menu>
-
+          </Menu> 
           {/* Favoritos */}
           <div className="inline-flex justify-center gap-x-1.5 px-1 py-3 text-xs mr-12">
 

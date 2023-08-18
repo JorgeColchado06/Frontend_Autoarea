@@ -29,7 +29,7 @@ const Favorite = () => {
       </div>
       <div className="flex flex-col gap-y-2 h-[360px] md:h-[480px] lg:h-[420px] overflow-y-auto overflow-x-hidden border-b">
         {favorite.map((item) => {
-          return <FavoriteItem item={item} key={item.id} />;
+          return <FavoriteItem item={item} key={item.ID} />;
         })}
       </div>
       <div className="flex flex-col gap-y-3  mt-2">
